@@ -28,22 +28,17 @@ int main( int argc, char *argv[] )
 {
     int available = atoi(argv[1]);
     int requestCount = argc - 2;
-    //printf("available = %d\n", available);
     
     int bandwidthRequest[requestCount];
     int bandwidthCurrent[requestCount];
     
-    //printf("Bandwidth(s): ");
     for (int i = 0; i < requestCount; i++)
     {
         bandwidthRequest[i] = atoi(argv[i+2]);
         bandwidthCurrent[i] = 0;
-        //printf("%d ", bandwidthArr[i]);
     }
     
     int temp = 0;
-//    printf("(1) requestCount: %d\n", requestCount);
-//    printf("(2) temp: %d\n", temp);
     while ((available > 0) && (temp < 3))
     {
         temp = 0;
@@ -63,12 +58,6 @@ int main( int argc, char *argv[] )
                 break;
             }
         }
-//        printf("(3) temp: %d\t\trequestCount: %d\n", temp, requestCount);
-//        printf("(4) available: %d\t\t'0'\n", available);
-//        printf("(5)temp < requestCount: %d\n", (temp < requestCount));
-//        printf("(6)available > 0: %d\n", (available > 0));
-//        
-////        getchar();
     }
     
     printf("Allocated bandwidth = ");
@@ -77,12 +66,6 @@ int main( int argc, char *argv[] )
     }
     
     printf("\nAvailable bandwidth after allocations = %d", available);
-    
-    
-//    for (int i = available; i > available; i--)
-//    {
-//        
-//    }
 
     printf("\n");
 }
