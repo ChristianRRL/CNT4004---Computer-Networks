@@ -111,10 +111,10 @@ int main(void)
     fgets(temp, sizeof(temp), stdin);   //use fgets to retreive entire input string
     
     strcpy(out_buf, temp);
-    //printf("(1) out_buf = %s", out_buf);  // DEBUG
-    //retcode = sendto(client_s, out_buf, (strlen(out_buf) + 1), 0,
-                     //(struct sockaddr *)&server_addr, sizeof(server_addr));
-  while(1) 
+    
+    retcode = sendto(client_s, out_buf, (strlen(out_buf) + 1), 0,
+                     (struct sockaddr *)&server_addr, sizeof(server_addr));
+
   // Now send the message to server.
   retcode = sendto(client_s, out_buf, (strlen(out_buf) + 1), 0,
   (struct sockaddr *)&server_addr, sizeof(server_addr));
@@ -123,11 +123,12 @@ int main(void)
     printf("*** ERROR - sendto() failed \n");
     exit(-1);
   }
-    //printf("(2) retcode = %d", retcode); // DEBUG
+
   // Wait to receive a message (need to spin loop on the receive)
   //  - Output a "." for each spin that sleeps for 1 second
   addr_len = sizeof(server_addr);
   retcode = 0;
+    printf("in_buf = %s", in_buf);
   while (retcode <= 0)
   {
     //check if the server is up now
@@ -142,11 +143,12 @@ int main(void)
     printf(".");
     fflush(stdout);
 #endif
-    //printf("retcode = %d", &retcode);
-      //printf("  --  client_s = %d", &client_s);
-      //printf("  --  in_buf = %c\n", *in_buf);
     retcode = recvfrom(client_s, in_buf, sizeof(in_buf), 0,
       (struct sockaddr *)&server_addr, &addr_len);
+//      printf("retcode = %d", retcode);
+//      printf("  --  client_s = %d", client_s);
+//      printf("  --  in_buf = %s", in_buf);
+//      printf("  -- out_buf = %s\n", out_buf);
   }
 
   // Output the received message

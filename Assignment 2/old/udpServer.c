@@ -92,10 +92,12 @@ int main()
     exit(-1);
   }
 
+    
   // >>> Step #3 <<<
   // Wait to receive a message from client
   printf("Waiting for recvfrom() to complete... \n");
   addr_len = sizeof(client_addr);
+    
   retcode = recvfrom(server_s, in_buf, sizeof(in_buf), 0,
     (struct sockaddr *)&client_addr, &addr_len);
   if (retcode < 0)
@@ -112,13 +114,11 @@ int main()
     ntohs(client_addr.sin_port));
     
     //copy in_buf contents to out_buf
-//    fgets(out_buf, sizeof(out_buf), stdin);
     strcpy(out_buf, in_buf);
     
     char cat[3] = "cat";
     char dog[3] = "dog";
     
-    char temp[140];
     for (int i =0; i < sizeof(out_buf); i++)
     {
         if ((out_buf[i] == cat[0]) && (out_buf[i+1] == cat[1]) && (out_buf[i+2] == cat[2]))
@@ -128,7 +128,7 @@ int main()
             out_buf[i+2] = dog[2];
         }
     }
-
+    
   // Output the received message
   printf("Received from client: %s \n", in_buf);
 
